@@ -2,3 +2,4 @@
 .vs
 bin
 obj
+/Parser/src/SpellParser/translator-api-key.txt
