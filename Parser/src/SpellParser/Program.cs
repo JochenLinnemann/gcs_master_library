@@ -6,6 +6,7 @@ using System.Net;
 using System.Xml.Serialization;
 using CsvHelper;
 using Newtonsoft.Json;
+using PeanutButter.INIFile;
 using SpellParser.Models;
 
 namespace SpellParser
@@ -15,6 +16,7 @@ namespace SpellParser
         #region Static Fields
 
         private const string SpellsResourceName = "SpellParser.data.Ritual Magic Spells.spl";
+        private const string SpellTranslationResourceName = "SpellParser.data.SpellTranslation.ini";
         private const string TranslatorApiKeyResourceName = "SpellParser.translator-api-key.txt";
 
         private static readonly Dictionary<string, string> _enToDe = new Dictionary<string, string>();
@@ -25,10 +27,21 @@ namespace SpellParser
 
         #region Methods
 
+        private static void LoadTranslations(Stream stream)
+        {
+            var translation = new INIFile();
+            translation.Parse(new StreamReader(stream).ReadToEnd());
+
+            foreach (var (key, value) in translation[""])
+                _enToDe.Add(key, value);
+        }
+
         private static void Main(string[] args)
         {
             var assembly = typeof(Program).Assembly;
             var spellsResouceStream = assembly.GetManifestResourceStream(SpellsResourceName) ?? Stream.Null;
+
+            LoadTranslations(assembly.GetManifestResourceStream(SpellTranslationResourceName));
 
             var xmlSerializer = new XmlSerializer(typeof(SpellList));
             var spellList = xmlSerializer.Deserialize(spellsResouceStream) as SpellList ?? new SpellList();
@@ -39,6 +52,8 @@ namespace SpellParser
 
             spellList.Spells = SeparateByCollege(spellList, true, true).ToList();
 
+            SaveTranslations("C:\\Temp\\SpellTranslation.ini");
+
             using var streamWriter = new StreamWriter("C:\\Temp\\Ritual Magic Spells-Adapted.csv");
             using var csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture);
 
@@ -46,6 +61,17 @@ namespace SpellParser
             csvWriter.WriteRecords(spellList.Spells);
 
             csvWriter.Flush();
+        }
+
+        private static void SaveTranslations(string filePath)
+        {
+            var translation = new INIFile();
+            translation.AddSection("");
+
+            foreach (var (key, value) in _enToDe)
+                translation[""].Add(key, value);
+
+            translation.Persist(filePath);
         }
 
         private static IEnumerable<RitualMagicSpell> SeparateByCollege(SpellList spellList,
