@@ -19,7 +19,7 @@ namespace SpellParser
         private const string SpellTranslationResourceName = "SpellParser.data.SpellTranslation.ini";
         private const string TranslatorApiKeyResourceName = "SpellParser.translator-api-key.txt";
 
-        private static readonly Dictionary<string, string> _enToDe = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> EnToDe = new Dictionary<string, string>();
 
         private static string _translatorApiKey;
 
@@ -27,13 +27,13 @@ namespace SpellParser
 
         #region Methods
 
-        private static void LoadTranslations(Stream stream)
+        private static void LoadTranslations(in Stream stream)
         {
             var translation = new INIFile();
             translation.Parse(new StreamReader(stream).ReadToEnd());
 
             foreach (var (key, value) in translation[""])
-                _enToDe.Add(key, value);
+                EnToDe.Add(key, value);
         }
 
         private static void Main(string[] args)
@@ -50,7 +50,8 @@ namespace SpellParser
                 new StreamReader(assembly.GetManifestResourceStream(TranslatorApiKeyResourceName) ?? Stream.Null)
                     .ReadToEnd();
 
-            spellList.Spells = SeparateByCollege(spellList, true, true).ToList();
+            spellList.SplittermondSpells = SeparateByCollege(spellList, true, true, true).ToList();
+            spellList.Spells.Clear();
 
             SaveTranslations("C:\\Temp\\SpellTranslation.ini");
 
@@ -61,21 +62,23 @@ namespace SpellParser
             csvWriter.WriteRecords(spellList.Spells);
 
             csvWriter.Flush();
+
+            xmlSerializer.Serialize(new StreamWriter("C:\\Temp\\Splittermond-Zaubersprüche.spl"), spellList);
         }
 
-        private static void SaveTranslations(string filePath)
+        private static void SaveTranslations(in string filePath)
         {
             var translation = new INIFile();
             translation.AddSection("");
 
-            foreach (var (key, value) in _enToDe)
+            foreach (var (key, value) in EnToDe)
                 translation[""].Add(key, value);
 
             translation.Persist(filePath);
         }
 
         private static IEnumerable<RitualMagicSpell> SeparateByCollege(SpellList spellList,
-            bool useMagicSchoolsOfSplittermond, bool translateToGerman)
+            bool useMagicSchoolsOfSplittermond, bool translateToGerman, bool calculateSpellLevel)
         {
             foreach (var spell in spellList.Spells)
             {
@@ -92,11 +95,12 @@ namespace SpellParser
                         Name = $"{spell.Name} ({GetBaseSkill(college)})",
                         NameDe = $"{Translate(spell.Name)} ({GetBaseSkill(college)})",
                         College = college,
-                        BaseSkill = GetBaseSkill(college)
+                        BaseSkill = GetBaseSkill(college),
+                        Points = GetSpellLevel(spell.PrereqCount).ToString()
                     };
             }
 
-            string GetBaseSkill(string college)
+            string GetBaseSkill(in string college)
             {
                 if (!useMagicSchoolsOfSplittermond)
                     return
@@ -128,7 +132,7 @@ namespace SpellParser
                     case "Light & Darkness":
                         return "Licht- & Schattenmagie";
                     case "Making & Breaking":
-                        return "Stärkungsmagie";
+                        return "Objektmagie";
                     case "Meta":
                     case "Meta/Linking":
                         return "Metamagie";
@@ -168,13 +172,13 @@ namespace SpellParser
                 }
             }
 
-            string Translate(string text)
+            string Translate(in string text)
             {
                 if (!translateToGerman)
                     return text;
 
-                if (_enToDe.ContainsKey(text))
-                    return _enToDe[text];
+                if (EnToDe.ContainsKey(text))
+                    return EnToDe[text];
 
                 var request =
                     WebRequest.Create(
@@ -202,7 +206,14 @@ namespace SpellParser
                         }
                     });
 
-                return _enToDe[text] = resultData?[0].translations?[0].text;
+                return EnToDe[text] = resultData?[0].translations?[0].text;
+            }
+
+            int GetSpellLevel(in int spellPrereqCount)
+            {
+                return calculateSpellLevel
+                    ? 1 + (int) (spellPrereqCount / 2f + 0.6)
+                    : 0;
             }
         }
 

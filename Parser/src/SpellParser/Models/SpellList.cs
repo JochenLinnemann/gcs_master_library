@@ -14,6 +14,9 @@ namespace SpellParser.Models
         [XmlElement("ritual_magic_spell")]
         public List<RitualMagicSpell> Spells { get; set; }
 
+        [XmlElement("splittermond_spell")]
+        public List<RitualMagicSpell> SplittermondSpells { get; set; }
+
         [XmlAttribute("version")]
         public string Version { get; set; }
 
