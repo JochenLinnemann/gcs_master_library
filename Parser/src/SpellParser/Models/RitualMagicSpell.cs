@@ -14,6 +14,7 @@ namespace SpellParser.Models
         public RitualMagicSpell(RitualMagicSpell spell)
         {
             Name = spell.Name;
+            NameDe = spell.NameDe;
             Difficulty = spell.Difficulty;
             College = spell.College;
             PowerSource = spell.PowerSource;
@@ -27,7 +28,7 @@ namespace SpellParser.Models
             BaseSkill = spell.BaseSkill;
             PrereqCount = spell.PrereqCount;
             Categories = new List<string>(spell.Categories);
-            MeleedWeapons = new List<MeleeWeapon>(spell.MeleedWeapons);
+            MeleeWeapons = new List<MeleeWeapon>(spell.MeleeWeapons);
             RangedWeapons = new List<RangedWeapon>(spell.RangedWeapons);
             Version = spell.Version;
         }
@@ -85,7 +86,7 @@ namespace SpellParser.Models
         public List<string> Categories { get; set; }
 
         [XmlElement("melee_weapon")]
-        public List<MeleeWeapon> MeleedWeapons { get; set; }
+        public List<MeleeWeapon> MeleeWeapons { get; set; }
 
         [XmlElement("ranged_weapon")]
         public List<RangedWeapon> RangedWeapons { get; set; }
