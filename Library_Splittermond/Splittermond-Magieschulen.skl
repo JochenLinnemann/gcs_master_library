@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<skill_list id="556c91a0-c927-49bf-84b6-536f68f43042" version="1">
+	<skill version="4">
+		<name>Beherrschungsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Mind Control</notes>
+	</skill>
+	<skill version="4">
+		<name>Bewegungsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Movement</notes>
+	</skill>
+	<skill version="4">
+		<name>Erkenntnismagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Knowledge</notes>
+	</skill>
+	<skill version="4">
+		<name>Felsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Earth</notes>
+	</skill>
+	<skill version="4">
+		<name>Feuermagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Fire</notes>
+	</skill>
+	<skill version="4">
+		<name>Ger&#228;uschmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Sound</notes>
+	</skill>
+	<skill version="4">
+		<name>Heilungsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Healing</notes>
+	</skill>
+	<skill version="4">
+		<name>Illusionsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Illusion &amp; Creation</notes>
+	</skill>
+	<skill version="4">
+		<name>Kommunikationsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Communication &amp; Empathy</notes>
+	</skill>
+	<skill version="4">
+		<name>Licht- &amp; Schattenmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Light &amp; Darkness</notes>
+	</skill>
+	<skill version="4">
+		<name>Metamagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Meta-Spells</notes>
+	</skill>
+	<skill version="4">
+		<name>Nahrungsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Food</notes>
+	</skill>
+	<skill version="4">
+		<name>Objektmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Making &amp; Breaking</notes>
+	</skill>
+	<skill version="4">
+		<name>Pflanzenmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Plant</notes>
+	</skill>
+	<skill version="4">
+		<name>Schutzmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Protection &amp; Warning</notes>
+	</skill>
+	<skill version="4">
+		<name>Tiermagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Animal</notes>
+	</skill>
+	<skill version="4">
+		<name>Todesmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Necromancy</notes>
+	</skill>
+	<skill version="4">
+		<name>Verwandlungsmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Body Control</notes>
+	</skill>
+	<skill version="4">
+		<name>Wassermagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Water</notes>
+	</skill>
+	<skill version="4">
+		<name>Wettermagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Weather</notes>
+	</skill>
+	<skill version="4">
+		<name>Windmagie</name>
+		<difficulty>Myst/A</difficulty>
+		<points>1</points>
+		<notes>Ritual Magic: Path of Air</notes>
+	</skill>
+</skill_list>
