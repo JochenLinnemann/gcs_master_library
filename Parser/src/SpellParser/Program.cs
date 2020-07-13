@@ -27,6 +27,20 @@ namespace SpellParser
 
         #region Methods
 
+        private static SpellList LoadSpellListJson(Stream spellsResouceStream)
+        {
+            var textReader = new StreamReader(spellsResouceStream);
+            var spellList = JsonConvert.DeserializeObject<SpellList>(textReader.ReadToEnd());
+            return spellList;
+        }
+
+        private static SpellList LoadSpellListXml(Stream spellsResouceStream)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(SpellList));
+            var spellList = xmlSerializer.Deserialize(spellsResouceStream) as SpellList ?? new SpellList();
+            return spellList;
+        }
+
         private static void LoadTranslations(in Stream stream)
         {
             var translation = new INIFile();
@@ -38,13 +52,14 @@ namespace SpellParser
 
         private static void Main(string[] args)
         {
+            const bool isV2 = true;
+
             var assembly = typeof(Program).Assembly;
             var spellsResouceStream = assembly.GetManifestResourceStream(SpellsResourceName) ?? Stream.Null;
 
             LoadTranslations(assembly.GetManifestResourceStream(SpellTranslationResourceName));
 
-            var xmlSerializer = new XmlSerializer(typeof(SpellList));
-            var spellList = xmlSerializer.Deserialize(spellsResouceStream) as SpellList ?? new SpellList();
+            var spellList = isV2 ? LoadSpellListJson(spellsResouceStream) : LoadSpellListXml(spellsResouceStream);
 
             _translatorApiKey =
                 new StreamReader(assembly.GetManifestResourceStream(TranslatorApiKeyResourceName) ?? Stream.Null)
@@ -63,7 +78,26 @@ namespace SpellParser
 
             csvWriter.Flush();
 
-            xmlSerializer.Serialize(new StreamWriter("C:\\Temp\\Splittermond-Zaubersprüche.spl"), spellList);
+            if (isV2)
+                SaveSpellListJson(new StreamWriter("C:\\Temp\\Splittermond-Zaubersprüche.spl"), spellList);
+            else
+                SaveSpellListXml(new StreamWriter("C:\\Temp\\Splittermond-Zaubersprüche.spl"), spellList);
+        }
+
+        private static void SaveSpellListJson(TextWriter textWriter, SpellList spellList)
+        {
+            spellList.Spells = spellList.SplittermondSpells;
+            spellList.SplittermondSpells = null;
+
+            var json = JsonConvert.SerializeObject(spellList, Formatting.Indented);
+            textWriter.Write(json);
+            textWriter.Flush();
+        }
+
+        private static void SaveSpellListXml(TextWriter textWriter, SpellList spellList)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(SpellList));
+            xmlSerializer.Serialize(textWriter, spellList);
         }
 
         private static void SaveTranslations(in string filePath)
