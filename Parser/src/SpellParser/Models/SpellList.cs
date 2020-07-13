@@ -7,6 +7,15 @@ namespace SpellParser.Models
     [XmlRoot("spell_list")]
     public class SpellList
     {
+        #region Constructors
+
+        public SpellList()
+        {
+            Type = "spell_list";
+        }
+
+        #endregion
+
         // @formatter:off — disable formatter after this line
 
         #region Properties

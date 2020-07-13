@@ -89,7 +89,8 @@ namespace SpellParser
             spellList.Spells = spellList.SplittermondSpells;
             spellList.SplittermondSpells = null;
 
-            var json = JsonConvert.SerializeObject(spellList, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(spellList, Formatting.Indented,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             textWriter.Write(json);
             textWriter.Flush();
         }
@@ -126,6 +127,7 @@ namespace SpellParser
                 foreach (var college in colleges)
                     yield return new RitualMagicSpell(spell)
                     {
+                        Type = GetSpellType(spell.Type),
                         Name = $"{spell.Name} ({GetBaseSkill(college)})",
                         NameDe = $"{Translate(spell.Name)} ({GetBaseSkill(college)})",
                         College = college,
@@ -248,6 +250,13 @@ namespace SpellParser
                 return calculateSpellLevel
                     ? 1 + (int) (spellPrereqCount / 2f + 0.6)
                     : 0;
+            }
+
+            string GetSpellType(in string spellType)
+            {
+                return calculateSpellLevel
+                    ? "splittermond_spell"
+                    : spellType;
             }
         }
 
