@@ -3,3 +3,4 @@
 bin
 obj
 /Parser/src/SpellParser/translator-api-key.txt
+/Parser/src/SpellParser/Properties/launchSettings.json

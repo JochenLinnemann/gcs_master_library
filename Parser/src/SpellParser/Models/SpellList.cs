@@ -32,13 +32,10 @@ namespace SpellParser.Models
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [XmlElement("ritual_magic_spell")]
+        [XmlElement("ritual_magic_spell", typeof(RitualMagicSpell))]
+        [XmlElement("splittermond_spell", typeof(SplittermondSpell))]
         [JsonProperty("rows")]
         public List<RitualMagicSpell> Spells { get; set; }
-
-        [XmlElement("splittermond_spell")]
-        [JsonProperty("rows2")]
-        public List<RitualMagicSpell> SplittermondSpells { get; set; }
 
         #endregion
 
