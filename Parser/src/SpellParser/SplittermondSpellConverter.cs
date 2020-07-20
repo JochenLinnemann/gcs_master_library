@@ -1,19 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SpellParser.Models;
 
 namespace SpellParser
 {
-    public static class SplittermondSpellConverter
+    public class SplittermondSpellConverter : JsonConverter
     {
         #region Methods
 
-        public static void ConvertSpellList(SpellList spellList,
-            bool useMagicSchoolsOfSplittermond = true, bool translateToGerman = true, bool calculateSpellLevel = true)
+        public static void ConvertSpellList(SpellList spellList)
         {
             var convertedSpells = new List<RitualMagicSpell>();
             foreach (var spell in spellList.Spells)
             {
+                if (spell is SplittermondSpell)
+                {
+                    convertedSpells.Add(new SplittermondSpell(spell));
+                    continue;
+                }
+
                 var colleges = spell.College
                     .Replace("Technological/", "Technological+")
                     .Replace("Meta/Linking", "Meta+Linking").Split("/")
@@ -22,14 +30,13 @@ namespace SpellParser
                         .Replace("Meta+Linking", "Meta/Linking"));
 
                 foreach (var college in colleges)
-                    convertedSpells.Add(new RitualMagicSpell(spell)
+                    convertedSpells.Add(new SplittermondSpell(spell)
                     {
-                        Type = GetSpellType(spell.Type),
                         Name = $"{spell.Name} ({GetBaseSkill(college)})",
-                        NameDe = $"{Translate(spell.Name)} ({GetBaseSkill(college)})",
+                        NameDe = $"{Translations.Translate(spell.Name)} ({GetBaseSkill(college)})",
                         College = college,
                         BaseSkill = GetBaseSkill(college),
-                        Points = GetSpellLevel(spell.PrereqCount).ToString()
+                        Points = (1 + (int) (spell.PrereqCount / 2f + 0.6)).ToString()
                     });
             }
 
@@ -37,10 +44,6 @@ namespace SpellParser
 
             string GetBaseSkill(in string college)
             {
-                if (!useMagicSchoolsOfSplittermond)
-                    return
-                        $"Path of {college.Replace("Technological", "Technology").Replace("Meta", "Meta-Spells").Replace("Armor Enchantment", "Enchantment")}";
-
                 switch (college)
                 {
                     case "Air":
@@ -103,28 +106,48 @@ namespace SpellParser
                         return "Technomagie";
 
                     default:
-                        return college;
+                        throw new ArgumentOutOfRangeException(nameof(college), $"College '{college}' is not known.");
                 }
             }
+        }
 
-            string Translate(in string text)
+        #endregion
+
+        #region Overrides of JsonConverter
+
+        /// <inheritdoc />
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <inheritdoc />
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue,
+            JsonSerializer serializer)
+        {
+            var obj = JObject.Load(reader);
+
+            RitualMagicSpell spell = null;
+            switch (obj.Property("type")?.Value.Value<string>())
             {
-                return translateToGerman ? Translations.Translate(text) : text;
+                case RitualMagicSpell.RitualMagicSpellType:
+                    spell = new RitualMagicSpell();
+                    break;
+                case SplittermondSpell.SplittermondSpellType:
+                    spell = new SplittermondSpell();
+                    break;
             }
 
-            int GetSpellLevel(in int spellPrereqCount)
-            {
-                return calculateSpellLevel
-                    ? 1 + (int) (spellPrereqCount / 2f + 0.6)
-                    : 0;
-            }
+            if (spell != null)
+                serializer.Populate(obj.CreateReader(), spell);
 
-            string GetSpellType(in string spellType)
-            {
-                return calculateSpellLevel
-                    ? "splittermond_spell"
-                    : spellType;
-            }
+            return spell;
+        }
+
+        /// <inheritdoc />
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(RitualMagicSpell) == objectType || typeof(SplittermondSpell) == objectType;
         }
 
         #endregion

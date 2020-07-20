@@ -6,6 +6,12 @@ namespace SpellParser.Models
 {
     public class RitualMagicSpell
     {
+        #region Static Fields
+
+        internal const string RitualMagicSpellType = "ritual_magic_spell";
+
+        #endregion
+
         #region Constructors
 
         public RitualMagicSpell()
@@ -127,7 +133,7 @@ namespace SpellParser.Models
         [JsonIgnore]
         public List<RangedWeapon> RangedWeapons { get; set; }
 
-         #endregion
+        #endregion
 
         // @formatter:on — enable formatter after this line
     }
