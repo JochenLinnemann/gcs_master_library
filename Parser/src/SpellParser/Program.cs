@@ -9,6 +9,7 @@ namespace SpellParser
     {
         #region Static Fields
 
+        private const string CustomSpellsResourceName = "SpellParser.data.Custom Spells.json";
         private const string SpellsResourceName = "SpellParser.data.Ritual Magic Spells.spl";
         private const string SpellTranslationResourceName = "SpellParser.data.SpellTranslation.ini";
 
@@ -23,13 +24,15 @@ namespace SpellParser
                 const bool isJsonBased = true;
 
                 var assembly = typeof(Program).Assembly;
-                var spellsResouceStream = assembly.GetManifestResourceStream(SpellsResourceName) ?? Stream.Null;
+                var customSpellsResourceStream =
+                    assembly.GetManifestResourceStream(CustomSpellsResourceName) ?? Stream.Null;
+                var spellsResourceStream = assembly.GetManifestResourceStream(SpellsResourceName) ?? Stream.Null;
 
                 Translations.LoadTranslations(assembly.GetManifestResourceStream(SpellTranslationResourceName));
 
                 var spellList = isJsonBased
-                    ? SpellListHandler.LoadSpellListJson(spellsResouceStream)
-                    : SpellListHandler.LoadSpellListXml(spellsResouceStream);
+                    ? SpellListHandler.LoadSpellListJson(spellsResourceStream, customSpellsResourceStream)
+                    : SpellListHandler.LoadSpellListXml(spellsResourceStream);
 
                 SplittermondSpellConverter.ConvertSpellList(spellList);
 

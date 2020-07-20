@@ -7,20 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\Custom Spells.json" />
     <None Remove="translator-api-key.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="data\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="..\..\..\Library\Magic\Ritual Magic Spells.spl" Link="data\Ritual Magic Spells.spl" />
+    <EmbeddedResource Include="data\Custom Spells.json" />
     <EmbeddedResource Include="translator-api-key.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\Translations\SpellTranslation.ini" Link="data\SpellTranslation.ini" />
+    <EmbeddedResource Include="D:\Repos\FORKS\gcs_master_library\Parser\src\Translations\SpellTranslation.ini" Link="SpellTranslation.ini" />
   </ItemGroup>
 
   <ItemGroup>

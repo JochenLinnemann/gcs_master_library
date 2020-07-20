@@ -9,10 +9,17 @@ namespace SpellParser
     {
         #region Methods
 
-        public static SpellList LoadSpellListJson(Stream spellListStream)
+        public static SpellList LoadSpellListJson(Stream spellListStream, Stream additionalSpellListStream)
         {
             var streamReader = new StreamReader(spellListStream);
             var spellList = JsonConvert.DeserializeObject<SpellList>(streamReader.ReadToEnd());
+
+            var additionalStreamReader = new StreamReader(additionalSpellListStream);
+            var additionalSpellList = JsonConvert.DeserializeObject<SpellList>(additionalStreamReader.ReadToEnd(),
+                new SplittermondSpellConverter());
+
+            spellList.Spells.AddRange(additionalSpellList.Spells);
+
             return spellList;
         }
 
