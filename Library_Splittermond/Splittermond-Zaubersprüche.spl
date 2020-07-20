@@ -24398,6 +24398,51 @@
         "Necromancy",
         "Ritual Magic"
       ]
+    },
+    {
+      "type": "splittermond_spell",
+      "version": "1",
+      "name": "Push (Bewegungsmagie)",
+      "name_de": "Stoß (Bewegungsmagie)",
+      "reference": "",
+      "difficulty": "IQ/H",
+      "college": "Movement",
+      "power_source": "Arcane",
+      "spell_class": "Regular",
+      "casting_cost": "1-3",
+      "maintenance_cost": "Same",
+      "casting_time": "1 sec",
+      "duration": "1 sec",
+      "points": "3",
+      "weapons": [
+        {
+          "type": "melee_weapon",
+          "damage": {
+            "type": "kb/point",
+            "base": "2d"
+          },
+          "usage": "Jet",
+          "reach": "1/point",
+          "parry": "No",
+          "defaults": [
+            {
+              "type": "DX",
+              "modifier": "-4"
+            },
+            {
+              "type": "Skill",
+              "name": "Innate Attack",
+              "specialization": "Beam"
+            }
+          ]
+        }
+      ],
+      "base_skill": "Bewegungsmagie",
+      "prereq_count": 4,
+      "categories": [
+        "Movement",
+        "Ritual Magic"
+      ]
     }
   ]
 }
