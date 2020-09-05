@@ -6,160 +6,195 @@
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "3d04f2ac-01ea-41a8-8437-6c46cfb47551",
 			"name": "Modifiers do not change weapon damage or add new attacks. That must be done manually."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "a4b9d87b-7db8-4a8a-a32d-20e1cefe246f",
 			"name": "Balanced",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
-			"cost": "+4 CF"
+			"cost": "+4 CF",
+			"tech_level": "0"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "e52afaba-e9ea-4f51-898c-c29328759d59",
 			"name": "Cheap",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
-			"cost": "-0.6 CF"
+			"cost": "-0.6 CF",
+			"tech_level": "0"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "f5adb800-0c1f-4b44-bf64-69efdbcd4e77",
 			"name": "Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+2 CF",
+			"tech_level": "0",
 			"notes": "Projectiles, and crushing- or impaling-only melee or thrown weapons."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "70eedc9d-a421-4631-94a1-306fe43bf691",
 			"name": "Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+3 CF",
+			"tech_level": "0",
 			"notes": "Fencing weapons, knives, swords, and missile weapons."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "e7ef0dcf-55c3-49bd-9c3b-9bf5b583e121",
 			"name": "Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+9 CF",
+			"tech_level": "0",
 			"notes": "Other cutting melee or thrown weapons."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "243000ed-6102-4433-b562-b8e9221b4202",
 			"name": "Poorly Balanced",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
-			"cost": "-0.6 CF"
+			"cost": "-0.6 CF",
+			"tech_level": "0"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "ce4685b5-e0a2-44fb-88c4-50f76b414595",
 			"name": "Silver Coated",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
-			"cost": "+2 CF"
+			"cost": "+2 CF",
+			"tech_level": "0"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "9a453a9f-c4cb-4333-8235-0010c8a0c957",
 			"name": "Silver",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
-			"cost": "+19 CF"
+			"cost": "+19 CF",
+			"tech_level": "0"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "99992d93-6309-4b1d-a0be-53c3f3fc11d8",
 			"name": "Very Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+14 CF",
+			"tech_level": "0",
 			"notes": "Crushing-only melee and thrown weapons:."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "4955f2cd-8c80-4b40-a1e9-039379c5116d",
 			"name": "Very Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+19 CF",
+			"tech_level": "0",
 			"notes": "Fencing weapons, knives, and swords."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "c3d9b08f-206c-46a6-a0ba-6d205461dad9",
 			"name": "Very Fine",
 			"reference": "LT59",
 			"cost_type": "to_base_cost",
 			"cost": "+49 CF",
+			"tech_level": "0",
 			"notes": "Other melee or thrown weapons, and projectiles."
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "d1855c1f-8423-476f-9383-16b869b05cff",
 			"name": "Cheap",
 			"reference": "LT109",
 			"cost_type": "to_base_cost",
 			"cost": "-0.6 CF",
+			"tech_level": "0",
 			"notes": "Armor, -1 DR"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "9f40958e-1a6a-4c5c-a577-196ae9d0d9b2",
 			"name": "Expert Tailoring",
 			"reference": "LT110",
 			"cost_type": "to_base_cost",
 			"cost": "+5 CF",
 			"weight_type": "to_base_weight",
-			"weight": "x85%"
+			"weight": "x85%",
+			"tech_level": "1"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "5472793a-c0bd-4947-a79e-758d2f60988b",
 			"name": "Masterful Tailoring",
 			"reference": "LT110",
 			"cost_type": "to_base_cost",
 			"cost": "+29 CF",
 			"weight_type": "to_base_weight",
-			"weight": "x70%"
+			"weight": "x70%",
+			"tech_level": "1"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "344aa5c5-cf8b-469b-8ed1-8a94c9185a9c",
 			"name": "Fluting",
 			"reference": "LT110",
 			"cost_type": "to_base_cost",
 			"cost": "+4 CF",
 			"weight_type": "to_base_weight",
 			"weight": "x90%",
+			"tech_level": "1",
 			"notes": "Plate, Scale, Lamellar"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "4c7f0f8e-f852-4e1e-8011-f7594d3a6958",
 			"name": "Hardened Steel",
 			"reference": "LT110",
 			"cost_type": "to_base_cost",
 			"cost": "+4 CF",
+			"tech_level": "4",
 			"notes": "+1 DR"
 		},
 		{
 			"type": "eqp_modifier",
 			"version": 1,
+			"id": "534aef37-9222-4951-b5ba-beb64734727e",
 			"name": "Duplex Plate",
 			"reference": "LT110",
 			"cost_type": "to_base_cost",
 			"cost": "+8 CF",
 			"weight_type": "to_base_weight",
 			"weight": "x90%",
+			"tech_level": "4",
 			"notes": "+1 DR"
 		}
 	]
